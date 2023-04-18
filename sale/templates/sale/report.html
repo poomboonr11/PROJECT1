@@ -1,0 +1,44 @@
+{% extends 'sale/report_base.html' %}
+
+{% block title %}Sale Report{% endblock %}
+
+{% block content %}
+<div class='row'>
+    <div class='col-sm'>
+    Sale No: {{ sale.sale_no }}<br>
+    </div>
+    <div class='col-sm'>
+    Sale Date: {{ sale.date }}<br>
+    </div>
+</div>
+<div class='row'>
+    <div class='col-sm'>
+    Customer Code: {{ sale.customer_code }}<br>
+    </div>
+</div>
+<table class='table'>
+    <tr>
+        <th>#</th>
+        <th>Product Code</th>
+        <th>Product Name</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Extended Price</th>
+    </tr>
+{% for lineitem in salelineitem %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ lineitem.product_code }}</td>
+        <td>{{ lineitem.product_code__name }}</td>
+        <td align='right'>{{ lineitem.unit_price }}</td>
+        <td align='right'>{{ lineitem.quantity }}</td>
+        <td align='right'>{{ lineitem.product_total }}</td>
+    <tr>
+{% endfor %}
+    <tr>
+        <td colspan='4'></td>
+        <td align='right'>Total Price</td><td align='right'>{{ sale.total }}</td>
+    </tr>
+</table>
+    <a class="QR"><img src="https://scontent.fbkk5-6.fna.fbcdn.net/v/t1.15752-9/312659754_1349422619124815_1202867527924252479_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=ae9488&_nc_ohc=QXGaFVeAuhoAX-BRckD&_nc_ht=scontent.fbkk5-6.fna&oh=03_AdSAnTxkqDkqhrhzq_2xLBL8BoD_PwPOW1Jn8GNURiwDNw&oe=63BE5F2D" height="250px" width="250px" style="margin-left: 220px;"></a>
+{% endblock %}
